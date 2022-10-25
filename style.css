@@ -1,0 +1,148 @@
+body {
+	margin:0px;
+	background:#101010;
+	font-family:'Yu Gothic','Meiryo UI','Meiryo',sans-serif;
+}
+
+.parent-toolbar {
+    display:flex !important;
+}
+
+.selection-block {
+    margin:0px;
+    display: inline-block !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+
+
+
+#toolbar span {
+	color:#FFF; 
+}
+
+#stdio {
+	position: relative;
+	width: calc(30% - 1.5px);
+	height: calc(100vh - 43px);
+	float: right;
+}
+
+#stdin {
+	height: 50%;
+}
+
+#stdout {
+	height: 50%;
+}
+
+#toolbar {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	border-bottom: 3px solid #515151;
+}
+
+#toolbar span {
+	font-size:10px;
+}
+
+.textLabel {
+    color:#03A9F4 !important;
+}
+
+#run {
+	background: #03A9F4;
+	border: 0px;
+    margin-top:20px;
+	height: 40px;
+	width: 40px;
+	color: #FFF;
+	border-radius: 0px;
+}
+#language-select {
+	height: 40px;
+	background: rgba(51,51,51,0.7);
+	border: 0px;
+	color: #FFF;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding: 0 25px 0 5px;
+    position: relative;
+    z-index: 1;
+}
+
+#theme-select {
+	height: 40px;
+    width:110px;
+	background: rgba(51,51,51,0.7);
+	border: 0px;
+	color: #FFF;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding: 0 25px 0 5px;
+    position: relative;
+    z-index: 1;
+}
+
+#editor {
+	position: relative;
+	width: calc(70% - 1.5px);
+	height: calc(100vh - 43px);
+	float: left;
+}
+
+#separator {
+	cursor: col-resize;
+	background: #888;
+	width: 3px;
+	height: calc(100vh - 43px);
+	float: left;
+}
+
+
+footer {
+	width:100%;
+	border-top:1px solid #888;
+	padding: 3px 15px;
+    position: fixed;
+    bottom: 0px;
+    z-index: 4;
+    background: #424242;
+}
+
+input {
+	background: #666;
+    border: 1px inset #00445D;
+}
+
+input:focus , input:hover {
+	border: 1px inset #00aeef;
+	background: #777;
+}
+
+#modal {
+	display: block;
+	width: 600px;
+	height: 400px;
+	background: #292828;
+	border: 1px solid #5fbcc8;
+	margin: 0px auto;
+	top: 50%;
+	position: relative;
+	box-shadow: 0px 0px 5px #5fbcc8;
+	margin-top: -200px;
+}
+
+#confirmer {
+	display: block;
+	width: 100%;
+	height: 320px;
+}
+
+#confirmer-language-tag {
+	background: #05b638;
+}

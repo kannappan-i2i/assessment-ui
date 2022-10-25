@@ -1,0 +1,38 @@
+{   
+    "monokai": {
+		"mode": "ace/theme/monokai",
+		"identifier": "monokai",
+		"code": "monokai"
+	},
+	"eclipse": {
+		"mode": "ace/theme/eclipse",
+		"identifier": "eclipse",
+		"code": "eclipse"
+	},
+	"github": {
+		"mode": "ace/theme/github",
+		"identifier": "github",
+		"code": "github"
+	},
+    "chrome": {
+		"mode": "ace/theme/chrome",
+		"identifier": "chrome",
+		"code": "chrome"
+	},
+    "cloud": {
+		"mode": "ace/theme/cloud",
+		"identifier": "cloud",
+		"code": "cloud"
+	},
+    "twilight": {
+		"mode": "ace/theme/twilight",
+		"identifier": "twilight",
+		"code": "twilight"
+	},
+    "nord_dark": {
+		"mode": "ace/theme/nord_dark",
+		"identifier": "nord_dark",
+		"code": "nord_dark"
+	}
+
+}
