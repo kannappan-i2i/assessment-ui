@@ -8,10 +8,12 @@ var confirmer;
 var xhr;
 var prog;
 var codeHash;
-var url="";
+var url="http://localhost:8086/api/submissions/";
 var debugurl="";
 var languages;
 var themes;
+var lang;
+var code;
 
 window.onload = function(){
     stdin = ace.edit("stdin");
@@ -40,10 +42,11 @@ window.onload = function(){
 };
 
 var func_run = function(callback) {
-    var lang = document.getElementById("language-select").options[document.getElementById("language-select").selectedIndex].innerText;
+    lang = document.getElementById("language-select").options[document.getElementById("language-select").selectedIndex].innerText;
+    code = editor.getValue();
     run(
         lang,
-        editor.getValue(),
+        code,
         callback
     )
 }
@@ -194,17 +197,33 @@ editor.getSession().on("change",function() {
 */
 
 function run(lang, code, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST",url+"/run",true);
-    xhr.onprogress = function() {
-        console.log("PROGRESS: ", xhr.responseText);
+    var xhr_run = new XMLHttpRequest();
+    xhr_run.open("POST",url,true);
+    xhr_run.setRequestHeader("Access-Control-Allow-Origin","*");
+    xhr_run.setRequestHeader("Access-Control-Allow-Methods","GET, POST");
+    xhr_run.setRequestHeader("Access-Control-Allow-Headers","Origin, Content-Type, X-Auth-Token");
+    xhr_run.onprogress = function() {
+        console.log("PROGRESS: ", xhr_run.responseText);
     };
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function(e) {
-        console.log(xhr.readyState);
-        xhr=undefined;
+    xhr_run.setRequestHeader('Content-Type','application/json');
+    xhr_run.onreadystatechange = function(e) {
+        console.log(xhr_run.readyState);
+        if (xhr_run.readyState === 4) {
+			document.getElementById("run").classList.remove('running');
+			if (xhr_run.status >= 200 && xhr_run.status < 300) {
+				stdout.setValue(remove_control_character(xhr_run.responseText));
+				xhr_run = undefined;
+				callback(lang, code, callback);
+			} else if(xhr_run.status == 0) {
+				xhr_run = undefined;
+			} else {
+                stdout.setValue(xhr_run.responseText);
+				xhr_run = undefined;
+			}
+		}
     };
-    xhr.send(JSON.stringify({language: lang, code: code, stdin: stdin.getValue()}));
+    xhr_run.send(JSON.stringify({language_id: lang, source_code: code, stdin: stdin.getValue()}));
+
 }
 
 $(function() {
@@ -226,3 +245,16 @@ $(function() {
         document.getElementById("run").onclick = function(event){
             func_run(run);
         }});
+
+function remove_control_character(str){
+	var ret = "";
+	for (var i=0; i<str.length; i++) {
+		var chr = str.charCodeAt(i);
+		if (chr >= 0x20 || chr == 0x0d || chr == 0x0a) {
+			ret += String.fromCharCode(chr);
+		}
+	}
+	return ret;
+}
+
+
